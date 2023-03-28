@@ -1,0 +1,6 @@
+build/
+target/sysroot/
+.ninja_log
+.sconsign.dblite
+a.out
+build.ninja
