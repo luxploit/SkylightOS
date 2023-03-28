@@ -12,7 +12,7 @@ Prerequsites:
 Setting Targets:
 ```
 export PREFIX="/usr/local/bin/cross"
-export TARGET={Set Target Architecture Here (example: i686-elf for 32-bit elf)}
+export TARGET=Set Architecture Here (i686-elf eg.)
 export PATH="$PREFIX/bin:$PATH"
 ```
 
