@@ -2,7 +2,7 @@
 
 # SkylightOS
 
-[![GitHub](https://img.shields.io/github/license/EthernalRaine/SkylightOS?style=plastic)](LICENSE)
+[![GitHub](https://img.shields.io/github/license/EthernalRaine/SkylightOS?logo=AGPL-3.0&style=plastic)](LICENSE)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/EthernalRaine/SkylightOS?style=plastic)
 ![Lines of code](https://img.shields.io/tokei/lines/github/EthernalRaine/SkylightOS?style=plastic)
 
