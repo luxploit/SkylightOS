@@ -29,8 +29,8 @@ Prerequsites:
 * GCC for target arch
 * GDB for target arch 
 * Binutils
-* Ninja
-* Nanobuild (installable via pip)
+* GRUB2
+* Scons (installable via pip)
 
 For Build Instructions, check [SkylightOS Build Docs](docs/building_skylightos.md) for a list of all targets and architectures or browse the [docs/architectures](docs/architectures/) folder directly.
 
