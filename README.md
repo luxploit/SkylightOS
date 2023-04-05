@@ -52,3 +52,4 @@ The full text of the license can be accessed via [this link](https://www.gnu.org
 * [EinTim](http://eintim.one) for giving me the idea and also helping me with some 0 iq issues
 * [nanobyte](https://www.youtube.com/@nanobyte-dev) for his amazing "Building an OS" series and his nanobuild system
 * [Le Official WGE Discord Server](https://discord.gg/C8kVCUy75g) for rating my OS and being an awesome community <3
+* [RedsonBr140](https://github.com/RedsonBr140) for his excellent BlobOS terminal driver
