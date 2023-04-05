@@ -1,0 +1,69 @@
+import os
+from SCons.Environment import Environment
+from SCons.Node.FS import Dir, File, Entry
+
+# this is from https://github.com/nanobyte-dev/nanobyte_os/blob/master/build_scripts/utility.py#L44
+
+def FindIndex(the_list, predicate):
+    for i in range(len(the_list)):
+        if predicate(the_list[i]):
+            return i
+    return None
+
+
+def IsFileName(obj, name):
+    if isinstance(obj, str):
+        return name in obj
+    elif isinstance(obj, File) or isinstance(obj, Dir) or isinstance(obj, Entry):
+        return obj.name == name
+    return False
+
+Import("targetenv") #type:ignore
+targetenv : Environment
+
+buildenv = targetenv.Clone()
+buildenv.Append(
+    CPPPATH = [ 
+        buildenv.Dir('.').srcnode(),
+        buildenv['PROJECTDIR'].Dir('src/base/sdk')
+    ],
+    LINKFLAGS = [
+        '-T', buildenv.File('linker.ld').srcnode().path,
+    ]
+)
+
+print(buildenv['PROJECTDIR'].Dir('src/base/esos/sdk/'))
+
+esos_sources = [
+    'crti.asm',
+    'crtn.asm',
+    'klibc/tty.c',
+    'klibc/vga.c',
+    'ekernel.c'
+]
+
+if targetenv['arch'] == 'ia32':
+    esos_sources.append('ia32/entry.asm')
+
+esos_objects = buildenv.Object(esos_sources)
+crti_object = esos_objects.pop(FindIndex(esos_objects, lambda item: IsFileName(item, 'crti.o')))
+crtn_object = esos_objects.pop(FindIndex(esos_objects, lambda item: IsFileName(item, 'crtn.o')))
+
+esos_objects = [
+    crti_object,
+    os.path.join(buildenv['LIBGCC_TOOLCHAIN'], 'crtbegin.o'),
+    *esos_objects,
+    os.path.join(buildenv['LIBGCC_TOOLCHAIN'], 'crtend.o'),
+    crtn_object  
+]
+
+kernel = buildenv.Program('chkernel.elf', esos_objects)
+kernel_stripped = buildenv.Command('ekernel.elf', kernel, '$STRIP -o $TARGET $SOURCE')
+
+if targetenv['config'] == 'fre':
+    buildenv.Default(kernel_stripped)
+else:
+    buildenv.Default(kernel)
+
+Export('kernel')            #type:ignore
+Export('kernel_stripped')   #type:ignore

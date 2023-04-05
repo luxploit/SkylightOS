@@ -1,1 +1,1 @@
-qemu-system-i386 -cdrom target/publish/esaul.iso
+qemu-system-i386 -kernel build/ekernel.bin

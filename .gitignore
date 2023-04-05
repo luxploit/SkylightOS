@@ -1,5 +1,6 @@
 build/
-target/sysroot/
+publish/sysroot/
+publish/skylight.iso
 .ninja_log
 .sconsign.dblite
 a.out
