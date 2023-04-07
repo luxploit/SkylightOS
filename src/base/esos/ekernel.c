@@ -22,5 +22,5 @@ section .rodata
 
 void _esaul_kernel_entry() {
     terminal_initialize();
-    terminal_writestring("goofy funny linkerscript");
+    terminal_writestring("welcome to skylightos!");
 }
