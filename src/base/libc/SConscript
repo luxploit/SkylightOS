@@ -1,0 +1,22 @@
+from SCons.Environment import Environment
+from tools.utility import FindIndex, IsFileName
+
+Import("targetenv") #type:ignore
+targetenv : Environment
+
+buildenv = targetenv.Clone()
+buildenv.Append(
+    CPPPATH = [ 
+        buildenv.Dir('.').srcnode(),
+        buildenv['PROJECTDIR'].Dir('src/base/sdk')
+    ],
+)
+
+libc_sources = [
+    'string/strlen.c'
+]
+
+libc_objects = buildenv.Object(libc_sources)
+libc = buildenv.StaticLibrary('libc.o', libc_objects)
+
+Export('libc') #type:ignore

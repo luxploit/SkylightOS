@@ -42,7 +42,7 @@ if hostenv['arch'] == 'ia32':
 
 toolchain_dir = Path(hostenv['toolchain']).resolve()
 toolchain_bin = Path(toolchain_dir, 'bin')
-toolchain_lib = Path(toolchain_dir, 'lib64', 'gcc', platform_prefix.removesuffix('-'), deps['gcc'])
+toolchain_lib = Path(toolchain_dir, 'lib', 'gcc', platform_prefix.removesuffix('-'), deps['gcc'])
 
 targetenv = hostenv.Clone(
     AS='nasm',
@@ -70,4 +70,5 @@ Export('targetenv') #type: ignore
 
 build_dir= 'build/{0}_{1}'.format(targetenv['arch'], targetenv['config'])
 
+SConscript('src/base/libc/SConscript', variant_dir=f'{build_dir}/base/libc', duplicate=0)    #type: ignore
 SConscript('src/base/esos/SConscript', variant_dir=f'{build_dir}/base/esos', duplicate=0)    #type: ignore

@@ -1,5 +1,9 @@
-/* osbuild.h
+/* string.h
  * Created on Fri Apr 07 2023 by Laura Raine (lnkexploit)
  * Codename "Esaul" Operating System
  * Copyright (c) 2023 - SkylightOS Project
 */
+
+#include <stddef.h>
+
+size_t strlen(const char* str);

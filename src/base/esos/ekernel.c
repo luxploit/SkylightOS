@@ -18,6 +18,9 @@ section .rodata
 ; this is found in src/base/esos/osbuild.h
 */
 
-void _esaul_kernel_entry() {
+#include <kernel/tty.h>
 
+void _esaul_kernel_entry() {
+    terminal_initialize();
+    terminal_writestring("goofy funny linkerscript");
 }

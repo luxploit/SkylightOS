@@ -6,7 +6,7 @@ SECTIONS {
     . = 1M;                             /* begin sections at 1 mib */
 
     .text BLOCK(4K) : ALIGN(4K) {       /* code sections */
-        *(.mulitboot)
+        *(.multiboot)
         *(.text)
     }
 

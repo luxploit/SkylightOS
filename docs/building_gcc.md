@@ -16,6 +16,14 @@ List of Available Targets per Architecture:
 |------------------|-------------------------------|
 | i686-elf         | ia32                          |
 
+List of dependency install commands per Linux Distro:
+| Linux Distro | Install Command                                                                                                                       |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| Fedora       | `sudo dnf install gcc gcc-c++ make bison flex gmp-devel libmpc-devel mpfr-devel texinfo`                                              |
+| Debian       | `sudo apt install build-essential bison flex libgmp3-dev libmpc-dev libmpfr-dev texinfo`                                              |
+| Gentoo       | `sudo emerge -a sys-devel/gcc sys-devel/make sys-devel/bison sys-devel/flex dev-libs/gmp dev-libs/mpc dev-libs/mpfr sys-apps/texinfo` |
+| Arch         | `sudo pacman -S base-devel gmp libmpc mpfr`                                                                                           |
+
 <br>
 
 Setting Targets:
