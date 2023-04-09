@@ -17,8 +17,6 @@ buildenv.Append(
 )
 
 esos_sources = [
-    'crti.asm',
-    'crtn.asm',
     'klibc/tty.c',
     'klibc/vga.c',
     'ekernel.c'
@@ -26,6 +24,8 @@ esos_sources = [
 
 if targetenv['arch'] == 'ia32':
     esos_sources.append('ia32/entry.asm')
+    esos_sources.append('ia32/crti.asm')
+    esos_sources.append('ia32/crtn.asm')
 
 esos_objects = buildenv.Object(esos_sources)
 entry_object = esos_objects.pop(FindIndex(esos_objects, lambda item: IsFileName(item, 'entry.o')))

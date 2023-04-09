@@ -21,13 +21,13 @@ hostenv = Environment(variables=vars,
     ENV=os.environ,
 
     # these are from https://github.com/nanobyte-dev/nanobyte_os/blob/master/SConstruct
-    ASCOMSTR        = "Assembling [$SOURCE]",
-    CCCOMSTR        = "Compiling  [$SOURCE]",
-    CXXCOMSTR       = "Compiling  [$SOURCE]",
-    SHCCCOMSTR      = "Compiling  [$SOURCE]",
-    SHCXXCOMSTR     = "Compiling  [$SOURCE]",
-    LINKCOMSTR      = "Linking    [$TARGET]",
-    SHLINKCOMSTR    = "Linking    [$TARGET]"
+    ASCOMSTR        = "[ASM]    Assembling  [$SOURCE]",
+    CCCOMSTR        = "[CC]     Compiling   [$SOURCE]",
+    CXXCOMSTR       = "[CXX]    Compiling   [$SOURCE]",
+    SHCCCOMSTR      = "[CC]     Compiling   [$SOURCE]",
+    SHCXXCOMSTR     = "[CXX]    Compiling   [$SOURCE]",
+    LINKCOMSTR      = "[LINK]   Linking     [$TARGET]",
+    SHLINKCOMSTR    = "[LINK]   Linking     [$TARGET]"
 )
 
 if hostenv['config'] == 'chk':
