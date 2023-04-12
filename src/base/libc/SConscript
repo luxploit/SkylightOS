@@ -13,6 +13,10 @@ buildenv.Append(
 )
 
 libc_sources = [
+    'memory/memcmp.c',
+    'memory/memcpy.c',
+    'memory/memmove.c',
+    'memory/memset.c',
     'string/strlen.c'
 ]
 

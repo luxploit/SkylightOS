@@ -27,7 +27,9 @@ hostenv = Environment(variables=vars,
     SHCCCOMSTR      = "[CC]     Compiling   [$SOURCE]",
     SHCXXCOMSTR     = "[CXX]    Compiling   [$SOURCE]",
     LINKCOMSTR      = "[LINK]   Linking     [$TARGET]",
-    SHLINKCOMSTR    = "[LINK]   Linking     [$TARGET]"
+    SHLINKCOMSTR    = "[LINK]   Linking     [$TARGET]",
+    ARCOMSTR        = "[AR]     Archiving   [$TARGET]",
+    RANLIBCOMSTR    = "[RANLIB] Indexing    [$TARGET]"
 )
 
 if hostenv['config'] == 'chk':
@@ -52,7 +54,7 @@ targetenv = hostenv.Clone(
     STRIP = f'{toolchain_bin}/{platform_prefix}strip',
 
     CFLAGS = ['-std=gnu99'],
-    CXXFLAGS = ['-std=c++03', '-fno-exceptions', '-fno-rtti'],
+    CXXFLAGS = ['-std=gnu++03', '-fno-exceptions', '-fno-rtti'],
     CCFLAGS = ['-ffreestanding', '-Wall', '-Wextra', '-nostdlib'],
     LINKFLAGS = ['-nostdlib'],
 

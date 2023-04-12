@@ -1,1 +1,1 @@
-qemu-system-i386 -kernel build/ekernel.bin
+qemu-system-i386 -cdrom publish/skylight.iso

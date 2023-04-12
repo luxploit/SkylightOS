@@ -18,9 +18,19 @@ section .rodata
 ; this is found in src/base/esos/osbuild.h
 */
 
-#include <kernel/tty.h>
+#include <kernel/panic.h>
+#include <kernel/terminal/tty.h>
+#include <kernel/debug/kstdio.h>
+#include <kernel/debug/klog.h>
 
 void _esaul_kernel_entry() {
     terminal_initialize();
-    terminal_writestring("welcome to skylightos!");
+    kputs("Welcome to SkylightOS!");
+    klog_info("test", "this is an info");
+    klog_warning("test", "this is a warning");
+    klog_error("test", "this is an error");
+    klog_debug("test", "this is a debug message");
+    klog_fatal("test", "this is a fatal error");
+
+    panic();
 }

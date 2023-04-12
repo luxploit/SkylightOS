@@ -14,6 +14,8 @@
 
 SkylightOS is a small, portable and extensible RTOS designed for a multitude of platforms. Skylight is designed to from the ground up, free from any arbitrary limitations of traditional platforms. Skylight can easily be ported to a device or general platform of your liking easily and is highly extensible for developers and users alike.
 
+**SkylightOS is not POSIX compliant by design**, this may be followed up in the future with a POSIX compliant subsystem but this is just a pipedream for now.
+
 For a Roadmap on Skylight's Development, check the [SkylightOS Milestone Roadmap](https://github.com/users/EthernalRaine/projects/2)
 
 <br>

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "tty.h": "c",
+        "cdefs.h": "c",
+        "limits.h": "c"
+    }
+}

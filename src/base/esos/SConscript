@@ -7,6 +7,9 @@ targetenv : Environment
 
 buildenv = targetenv.Clone()
 buildenv.Append(
+    CFLAGS = [
+        '-D_esaul_libk=1'
+    ],
     CPPPATH = [ 
         buildenv.Dir('.').srcnode(),
         buildenv['PROJECTDIR'].Dir('src/base/sdk')
@@ -17,8 +20,17 @@ buildenv.Append(
 )
 
 esos_sources = [
-    'klibc/tty.c',
-    'klibc/vga.c',
+    'klibc/debug/klog.c',
+    'klibc/debug/kprintf.c',
+    'klibc/debug/kputs.c',
+    'klibc/io/inx.c',
+    'klibc/io/outx.c',
+    'klibc/io/wait.c',
+    'klibc/terminal/cursor.c',
+    'klibc/terminal/tty.c',
+    'klibc/terminal/vga.c',
+    'klibc/panic.c',
+    'osbuild.c',
     'ekernel.c'
 ]
 
