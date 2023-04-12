@@ -11,25 +11,19 @@ vars.AddVariables(
 )
 vars.Add('toolchain', help='Toolchain Path', default='/usr/local/bin/cross')
 
-deps = {
-    'binutils' : '2.40',
-    'gcc' : '12.2.0',
-    'gdb' : '13.1'
-}
-
 hostenv = Environment(variables=vars,
     ENV=os.environ,
 
     # these are from https://github.com/nanobyte-dev/nanobyte_os/blob/master/SConstruct
-    ASCOMSTR        = "[ASM]    Assembling  [$SOURCE]",
-    CCCOMSTR        = "[CC]     Compiling   [$SOURCE]",
-    CXXCOMSTR       = "[CXX]    Compiling   [$SOURCE]",
-    SHCCCOMSTR      = "[CC]     Compiling   [$SOURCE]",
-    SHCXXCOMSTR     = "[CXX]    Compiling   [$SOURCE]",
-    LINKCOMSTR      = "[LINK]   Linking     [$TARGET]",
-    SHLINKCOMSTR    = "[LINK]   Linking     [$TARGET]",
-    ARCOMSTR        = "[AR]     Archiving   [$TARGET]",
-    RANLIBCOMSTR    = "[RANLIB] Indexing    [$TARGET]"
+    #ASCOMSTR        = "[ASM]    Assembling  [$SOURCE]",
+    #CCCOMSTR        = "[CC]     Compiling   [$SOURCE]",
+    #CXXCOMSTR       = "[CXX]    Compiling   [$SOURCE]",
+    #SHCCCOMSTR      = "[CC]     Compiling   [$SOURCE]",
+    #SHCXXCOMSTR     = "[CXX]    Compiling   [$SOURCE]",
+    #LINKCOMSTR      = "[LINK]   Linking     [$TARGET]",
+    #SHLINKCOMSTR    = "[LINK]   Linking     [$TARGET]",
+    #ARCOMSTR        = "[AR]     Archiving   [$TARGET]",
+    #RANLIBCOMSTR    = "[RANLIB] Indexing    [$TARGET]"
 )
 
 if hostenv['config'] == 'chk':
@@ -40,27 +34,21 @@ else :
 
 platform_prefix = ''
 if hostenv['arch'] == 'ia32':
-    platform_prefix = 'i686-elf-'
-
-toolchain_dir = Path(hostenv['toolchain']).resolve()
-toolchain_bin = Path(toolchain_dir, 'bin')
-toolchain_lib = Path(toolchain_dir, 'lib', 'gcc', platform_prefix.removesuffix('-'), deps['gcc'])
+    platform_prefix = 'i686-elf'
 
 targetenv = hostenv.Clone(
     AS='nasm',
-    CC = f'{toolchain_bin}/{platform_prefix}gcc',
-    CXX = f'{toolchain_bin}/{platform_prefix}g++',
-    LD = f'{toolchain_bin}/{platform_prefix}gcc',
-    STRIP = f'{toolchain_bin}/{platform_prefix}strip',
+    CC = f'clang',
+    CXX = f'clang++',
+    LD = f'ld-lld',
+    STRIP = f'strip',
 
     CFLAGS = ['-std=gnu99'],
     CXXFLAGS = ['-std=gnu++03', '-fno-exceptions', '-fno-rtti'],
-    CCFLAGS = ['-ffreestanding', '-Wall', '-Wextra', '-nostdlib'],
-    LINKFLAGS = ['-nostdlib'],
+    CCFLAGS = ['-ffreestanding', '-Wall', '-Wextra', '-nostdlib', '-fno-builtin', '--target=i686-pc-none-elf', '-march=i686'],
+    LINKFLAGS = ['-nostdlib', '--target=i686-pc-none-elf', '-march=i686'],
 
     PROJECTDIR = hostenv.Dir('.').srcnode(),
-
-    LIBGCC_TOOLCHAIN = str(toolchain_lib)
 )
 
 if targetenv['arch'] == 'ia32':
