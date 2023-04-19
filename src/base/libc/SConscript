@@ -1,5 +1,4 @@
 from SCons.Environment import Environment
-from tools.utility import FindIndex, IsFileName
 
 Import("targetenv") #type:ignore
 targetenv : Environment

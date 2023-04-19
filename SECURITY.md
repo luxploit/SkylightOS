@@ -1,4 +1,4 @@
-# Security Policy
+# SkylightOS - Security Policy
 
 ## Supported Versions
 
