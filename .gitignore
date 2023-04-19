@@ -1,6 +1,7 @@
 bin/
 publish/sysroot/
 publish/skylight.iso
+build/__pycache__
 tools/__pycache__
 .ninja_log
 .sconsign.dblite

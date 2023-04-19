@@ -58,7 +58,7 @@ Help(vars.GenerateHelpText(hostenv)) #type: ignore
 Export('hostenv')   #type: ignore
 Export('targetenv') #type: ignore
 
-build_dir= '../bin/{0}_{1}'.format(targetenv['arch'], targetenv['config'])
+build_dir= 'bin/{0}_{1}'.format(targetenv['arch'], targetenv['config'])
 
-SConscript('../src/base/libc/SConscript', variant_dir=f'{build_dir}/base/libc', duplicate=0)    #type: ignore
-SConscript('../src/base/esos/SConscript', variant_dir=f'{build_dir}/base/esos', duplicate=0)    #type: ignore
+SConscript('src/base/libc/SConscript', variant_dir=f'{build_dir}/base/libc', duplicate=0)    #type: ignore
+SConscript('src/base/esos/SConscript', variant_dir=f'{build_dir}/base/esos', duplicate=0)    #type: ignore
