@@ -1,4 +1,4 @@
-# SkylightOS Contribution Guildlines
+# SkylightOS - Contribution Guildlines
 
 ## Code Headers
 

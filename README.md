@@ -6,8 +6,6 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/EthernalRaine/SkylightOS?style=plastic)
 ![Lines of code](https://img.shields.io/tokei/lines/github/EthernalRaine/SkylightOS?style=plastic)
 
-*the lines of code are currently broken, upstream from shields.io*
-
 </div>
 
 *Current Codename: Esaul*

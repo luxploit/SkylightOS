@@ -1,4 +1,4 @@
-# 3rd Party Licenses Notice
+# SkylightOS - 3rd Party Licenses Notice
 
 This Project makes use of code from different projects under different licenses, below are the respective licenses. Even if not required by the license, we want to give credit where credit is due and not use someone elses work without acknowledging the authors.
 
