@@ -1,4 +1,5 @@
 bin/
+build/ia32_chk
 publish/sysroot/
 publish/skylight.iso
 build/__pycache__

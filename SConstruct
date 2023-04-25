@@ -15,15 +15,15 @@ hostenv = Environment(variables=vars,
     ENV=os.environ,
 
     # these are from https://github.com/nanobyte-dev/nanobyte_os/blob/master/SConstruct
-    #ASCOMSTR        = "[ASM]    Assembling  [$SOURCE]",
-    #CCCOMSTR        = "[CC]     Compiling   [$SOURCE]",
-    #CXXCOMSTR       = "[CXX]    Compiling   [$SOURCE]",
-    #SHCCCOMSTR      = "[CC]     Compiling   [$SOURCE]",
-    #SHCXXCOMSTR     = "[CXX]    Compiling   [$SOURCE]",
-    #LINKCOMSTR      = "[LINK]   Linking     [$TARGET]",
-    #SHLINKCOMSTR    = "[LINK]   Linking     [$TARGET]",
-    #ARCOMSTR        = "[AR]     Archiving   [$TARGET]",
-    #RANLIBCOMSTR    = "[RANLIB] Indexing    [$TARGET]"
+    ASCOMSTR        = "[ASM]    Assembling  [$SOURCE]",
+    CCCOMSTR        = "[CC]     Compiling   [$SOURCE]",
+    CXXCOMSTR       = "[CXX]    Compiling   [$SOURCE]",
+    SHCCCOMSTR      = "[CC]     Compiling   [$SOURCE]",
+    SHCXXCOMSTR     = "[CXX]    Compiling   [$SOURCE]",
+    LINKCOMSTR      = "[LINK]   Linking     [$TARGET]",
+    SHLINKCOMSTR    = "[LINK]   Linking     [$TARGET]",
+    ARCOMSTR        = "[AR]     Archiving   [$TARGET]",
+    RANLIBCOMSTR    = "[RANLIB] Indexing    [$TARGET]"
 )
 
 if hostenv['config'] == 'chk':
@@ -36,23 +36,26 @@ platform_prefix = ''
 if hostenv['arch'] == 'ia32':
     platform_prefix = 'i686-elf'
 
+toolchain_dir = Path(hostenv['toolchain']).resolve()
+toolchain_bin = Path(toolchain_dir, 'bin')
+
 targetenv = hostenv.Clone(
     AS='nasm',
-    CC = f'clang',
-    CXX = f'clang++',
-    LD = f'ld-lld',
-    STRIP = f'strip',
+    CC = 'clang',
+    CXX = 'clang++',
+    LINK = f'{toolchain_bin}/{platform_prefix}-ld',
+    STRIP = f'{toolchain_bin}/{platform_prefix}-strip',
 
     CFLAGS = ['-std=gnu99'],
     CXXFLAGS = ['-std=gnu++03', '-fno-exceptions', '-fno-rtti'],
-    CCFLAGS = ['-ffreestanding', '-Wall', '-Wextra', '-nostdlib', '-fno-builtin', '--target=i686-pc-none-elf', '-march=i686'],
-    LINKFLAGS = ['-nostdlib', '--target=i686-pc-none-elf', '-march=i686'],
+    CCFLAGS = ['-ffreestanding', '-Wall', '-Wextra', '-nostdlib', '-fno-builtin'],
+    LINKFLAGS = ['-nostdlib', '-static', '-z', 'max-page-size=4096', '-z', 'noexecstack'],
 
     PROJECTDIR = hostenv.Dir('.').srcnode(),
 )
 
 if targetenv['arch'] == 'ia32':
-    targetenv.Append(ASFLAGS = ['-felf32'])
+    targetenv.Append(ASFLAGS = ['-felf32'], CCFLAGS = ['--target=i686-pc-none-elf', '-march=i686'])
 
 Help(vars.GenerateHelpText(hostenv)) #type: ignore
 Export('hostenv')   #type: ignore
