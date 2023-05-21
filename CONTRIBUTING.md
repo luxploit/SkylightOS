@@ -21,7 +21,7 @@ Assembly Files (.asm)
 ; Copyright (c) [year] - SkylightOS Project
 ```
 
-If you're using Visual Studio Code, it's recommended to use this extension: https://marketplace.visualstudio.com/items?itemName=doi.fileheadercomment. Pressing Ctrl+Shift+P and select "FileHeaderCommand: Select from Available Templates" to choose a C or ASM header.
+If you're using Visual Studio Code, it's recommended to use this extension: https://marketplace.visualstudio.com/items?itemName=doi.fileheadercomment. Press Ctrl+Shift+P and select "FileHeaderCommand: Select from Available Templates" to choose a C or ASM header.
 
 ```json
 // Laura Raine's Extension Config
@@ -54,7 +54,7 @@ If you're using Visual Studio Code, it's recommended to use this extension: http
 
 ## Pull Requests
 
-All pull requests that relate to the OS itself must successfully build, package and install on real hardware. This is to ensure and rule out VM flackyness and to provide accurate results. Development can however be done using QEMU or Bochs (Bochs can be used however not supported by default, a PR for it would be welcome).
+All pull requests that relate to the OS itself must successfully build, package and install on real hardware. This is to ensure and rule out VM flakiness and to provide accurate results. Development can however be done using QEMU or Bochs (Bochs can be used however not supported by default, a PR for it would be welcome).
 
 ## Issues and Feature Ideas
 
