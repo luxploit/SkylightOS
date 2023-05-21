@@ -12,18 +12,18 @@
 
 *Current Codename: Esaul*
 
-SkylightOS is a small, portable and extensible RTOS designed for a multitude of platforms. Skylight is designed to from the ground up, free from any arbitrary limitations of traditional platforms. Skylight can easily be ported to a device or general platform of your liking easily and is highly extensible for developers and users alike.
+SkylightOS is a small, portable and extensible RTOS designed for a multitude of platforms. Skylight is designed from the ground up, free from any arbitrary limitations of traditional platforms. Skylight can easily be ported to a device or general platform of your liking easily and is highly extensible for developers and users alike.
 
 **SkylightOS is not POSIX compliant by design**, this may be followed up in the future with a POSIX compliant subsystem but this is just a pipedream for now.
 
-For a Roadmap on Skylight's Development, check the [SkylightOS Milestone Roadmap](https://github.com/users/EthernalRaine/projects/2)
+For a roadmap on Skylight's development, check the [SkylightOS Milestone Roadmap](https://github.com/users/EthernalRaine/projects/2)
 
 <br>
 
 ## Build Instructions
 For instructions on how to build GCC for your target architecture, check [GCC Build Docs](docs/building_gcc.md)
 
-Prerequsites:
+Prerequisites:
 * Git
 * Python 3.10+
 * QEMU
@@ -34,7 +34,7 @@ Prerequsites:
 * GRUB2
 * Scons (installable via pip)
 
-For Build Instructions, check [SkylightOS Build Docs](docs/building_skylightos.md) for a list of all targets and architectures or browse the [docs/architectures](docs/architectures/) folder directly.
+For build instructions, check [SkylightOS Build Docs](docs/building_skylightos.md) for a list of all targets and architectures or browse the [docs/architectures](docs/architectures/) folder directly.
 
 <br>
 
