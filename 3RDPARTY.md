@@ -1,6 +1,6 @@
 # SkylightOS - 3rd Party Licenses Notice
 
-This Project makes use of code from different projects under different licenses, below are the respective licenses. Even if not required by the license, we want to give credit where credit is due and not use someone elses work without acknowledging the authors.
+This project makes use of code from different projects under different licenses, below are the respective licenses. Even if not required by the license, we want to give credit where credit is due and not use someone else's work without acknowledging the authors.
 
 The build scripts are a modified version of the [Nanobyte OS](https://github.com/nanobyte-dev/nanobyte_os) SConstruct Scripts, licensed under the unlicense:
 
