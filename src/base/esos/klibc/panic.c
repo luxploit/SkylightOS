@@ -4,6 +4,7 @@
  * Copyright (c) 2023 - SkylightOS Project
 */
 
+#include <kernel/debug/kstdio.h>
 #include <kernel/debug/klog.h>
 #include <kernel/panic.h>
 

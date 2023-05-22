@@ -1,4 +1,4 @@
-# SkylightOS Contribution Guidelines
+SkylightOS - Contribution Guidelines
 
 ## Code Headers
 

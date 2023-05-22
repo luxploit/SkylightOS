@@ -26,6 +26,7 @@ section .rodata
 void _esaul_kernel_entry() {
     terminal_initialize();
     kputs("Welcome to SkylightOS!");
+    kputs("Sponsored by clang-15 /s");
     klog_info("test", "this is an info");
     klog_warning("test", "this is a warning");
     klog_error("test", "this is an error");
