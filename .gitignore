@@ -4,9 +4,7 @@ publish/sysroot/
 publish/skylight.iso
 build/__pycache__
 tools/__pycache__
-toolchain/toolchain-binaries/
-toolchain/build-binutils/*.tar.gz
-toolchain/build-binutils/binutils*
+toolchain/
 .ninja_log
 .sconsign.dblite
 a.out

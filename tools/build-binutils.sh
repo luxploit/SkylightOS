@@ -13,7 +13,12 @@ echo "Required tools check passed."
 # random variables
 BINUTILS_VERSION="2.40"
 TARGET="i686-elf"
-CURRENT_PWD=$PWD
+TOOLCHAIN_PWD=${PWD}/../toolchain
+
+# work starts here
+rm -rf $TOOLCHAIN_PWD
+mkdir $TOOLCHAIN_PWD
+cd $TOOLCHAIN_PWD
 
 # cleanup
 echo "Cleaning up any possible remains of previous builds..."
@@ -27,7 +32,7 @@ wget https://ftp.gnu.org/gnu/binutils/binutils-${BINUTILS_VERSION}.tar.gz
 tar -xvf binutils-${BINUTILS_VERSION}.tar.gz
 mkdir binutils-compile
 cd binutils-compile
-../binutils-${BINUTILS_VERSION}/configure --target=${TARGET} --prefix="$CURRENT_PWD/../toolchain-binaries" --with-sysroot --disable-nls --disable-werror
+$TOOLCHAIN_PWD/binutils-${BINUTILS_VERSION}/configure --target=${TARGET} --prefix="$TOOLCHAIN_PWD/toolchain-binaries" --with-sysroot --disable-nls --disable-werror
 make -j$(nproc)
 make -j$(nproc) install
 echo "Compiling successful."
