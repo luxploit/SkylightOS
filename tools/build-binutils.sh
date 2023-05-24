@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ ! -f ./tooldir.stamp ]; then
+  echo "You are not running this script from the SkylightOS tools directory. Please change to the SkylightOS tools directory."
+  exit 1
+fi
+
 # wget check
 echo "Performing required tools check..."
 # TODO: implement curl support (even tho i never use it personally)
