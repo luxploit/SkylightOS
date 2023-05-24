@@ -20,7 +20,6 @@ vars.AddVariables(
     EnumVariable('arch', help='Target Architecture', default='ia32', allowed_values=('ia32')),
     EnumVariable('image', help='Image Type', default='bin', allowed_values=('iso', 'bin'))
 )
-#vars.Add('toolchain', help='Toolchain Path', default='/usr/local/bin/cross')
 
 hostenv = Environment(variables=vars,
     ENV=os.environ,
@@ -76,9 +75,6 @@ elif which(toollist[0]) is None or which(toollist[1]) is None:
     binpath = Path(binpath, 'toolchain')
     binpath = Path(binpath, 'toolchain-binaries')
     binpath = Path(binpath, 'bin')
-
-#toolchain_dir = Path(hostenv['toolchain']).resolve()
-#toolchain_bin = Path(toolchain_dir, 'bin')
 
 if is_binutils_built_locally:
     linker = f'{binpath}/{platform_prefix}-ld'
