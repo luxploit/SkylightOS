@@ -1,0 +1,33 @@
+#!/bin/bash
+set -e
+
+# wget check
+echo "Performing required tools check..."
+# TODO: implement curl support (even tho i never use it personally)
+if ! [ -x "$(command -v wget)" ]; then
+  echo 'Error: wget is not installed.' >&2
+  exit 1
+fi
+echo "Required tools check passed."
+
+# random variables
+BINUTILS_VERSION="2.40"
+TARGET="i686-elf"
+CURRENT_PWD=$PWD
+
+# cleanup
+echo "Cleaning up any possible remains of previous builds..."
+rm -rf binutils-${BINUTILS_VERSION} binutils-compile
+
+# actual compile
+echo "Compiling binutils for ${TARGET} version ${BINUTILS_VERSION}..."
+
+rm -f binutils-${BINUTILS_VERSION}.tar.gz
+wget https://ftp.gnu.org/gnu/binutils/binutils-${BINUTILS_VERSION}.tar.gz
+tar -xvf binutils-${BINUTILS_VERSION}.tar.gz
+mkdir binutils-compile
+cd binutils-compile
+../binutils-${BINUTILS_VERSION}/configure --target=${TARGET} --prefix="$CURRENT_PWD/../toolchain-binaries" --with-sysroot --disable-nls --disable-werror
+make -j$(nproc)
+make -j$(nproc) install
+echo "Compiling successful."
