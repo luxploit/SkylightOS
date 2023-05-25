@@ -46,6 +46,9 @@ platform_prefix = ''
 if hostenv['arch'] == 'ia32':
     platform_prefix = 'i686-elf'
 
+print("[GEN]    Generating  [src/base/sdk/system/osver.h]")
+call(["python3", "tools/update_osver.py", "update"])
+
 toollist = [f'{platform_prefix}-ld', f'{platform_prefix}-strip']
 is_binutils_built_locally = False
 if not which(f'toolchain/toolchain-binaries/bin/{toollist[0]}') is None or not which(f'toolchain/toolchain-binaries/bin/{toollist[1]}') is None:

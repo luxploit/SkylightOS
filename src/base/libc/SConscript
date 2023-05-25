@@ -16,7 +16,8 @@ libc_sources = [
     'memory/memcpy.c',
     'memory/memmove.c',
     'memory/memset.c',
-    'string/strlen.c'
+    'string/strlen.c',
+    'system/sysinfo.c'
 ]
 
 libc_objects = buildenv.Object(libc_sources)

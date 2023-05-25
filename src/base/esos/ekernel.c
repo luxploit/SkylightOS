@@ -22,11 +22,13 @@ section .rodata
 #include <kernel/terminal/tty.h>
 #include <kernel/debug/kstdio.h>
 #include <kernel/debug/klog.h>
+#include <sysinfo.h>
 
 void _esaul_kernel_entry() {
     terminal_initialize();
     kputs("Welcome to SkylightOS!");
     kputs("Sponsored by clang-15 /s");
+    kprintf("%s%s%s%s%s%s%s%s%s%s\n", "SkylightOS build 1.0.", sysinfo().buildnum, ".", sysinfo().cpuarch, "(", sysinfo().buildtype, ").", sysinfo().buildlab, ".", sysinfo().builddate);
     klog_info("test", "this is an info");
     klog_warning("test", "this is a warning");
     klog_error("test", "this is an error");
