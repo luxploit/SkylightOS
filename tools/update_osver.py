@@ -48,7 +48,7 @@ elif argv[1] == "update":
         bnum = bnum.strip()
         bnum = bnum[14:]
         bnum = bnum[:-1]
-        bnum = int(bnum)
+        bnum = int(float(bnum))
     with open(dname + '/../src/base/sdk/system/osver.h', 'w') as f2:
         f2.writelines(lines[:-5])
         f2.write(f'#define btype "{configo.config}"\n')
