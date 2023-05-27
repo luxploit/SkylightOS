@@ -14,7 +14,7 @@ for tool in toollist:
         print(f'ERR: required tool {tool} was not found')
         exit(1)
 
-vars = Variables('config.py', ARGUMENTS) #type: ignore
+vars = Variables('build/config.py', ARGUMENTS) #type: ignore
 vars.AddVariables(
     EnumVariable('config', help='Build Configuration', default='chk', allowed_values=('chk', 'fre')),
     EnumVariable('arch', help='Target Architecture', default='ia32', allowed_values=('ia32')),
