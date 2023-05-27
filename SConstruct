@@ -58,9 +58,9 @@ if not which(f'toolchain/toolchain-binaries/bin/{toollist[0]}') is None or not w
     binpath = Path(binpath, 'bin')
 elif which(toollist[0]) is None or which(toollist[1]) is None:
     print(f'ERR: {platform_prefix} binutils not found or incomplete')
-    print('Should we attempt to build it? (YES if you agree, any other input if not')
+    print('Should we attempt to build it? (y if you agree, any other input if not)')
     answer = input()
-    if answer != 'YES':
+    if answer != 'y':
         print(f'Please install {platform_prefix} binutils and rerun scons.')
         exit(1)
     print('Alright, attempting to build binutils')
