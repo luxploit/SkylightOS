@@ -5,7 +5,7 @@
 */
 
 
-struct systeminfo {
+typedef struct {
 	// the reason why buildnum is a char and not an int
 	// is becausw we will later need to concatenate it with an str
 	// and i don't feel like implementing snprintf for this
@@ -15,6 +15,6 @@ struct systeminfo {
 	char *buildlab;
 	char *cpuarch;
 	char *builddate;
-};
+} systeminfo;
 
-struct systeminfo sysinfo();
+systeminfo sysinfo();

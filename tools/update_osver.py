@@ -42,23 +42,42 @@ if argv[1] == "read":
             exit(1)
 
 elif argv[1] == "update":
-    with open(dname + '/../src/base/sdk/system/osver.h') as f1:
-        lines = f1.readlines()
-        bnum = lines[-1]
-        bnum = bnum.strip()
-        bnum = bnum[14:]
-        bnum = bnum[:-1]
-        bnum = int(float(bnum))
-    with open(dname + '/../src/base/sdk/system/osver.h', 'w') as f2:
-        f2.writelines(lines[:-5])
-        f2.write(f'#define btype "{configo.config}"\n')
-        f2.write(f'#define lab "{popen("git symbolic-ref --short HEAD").read().strip()}"\n')
-        f2.write(f'#define barch "{configo.arch}"\n')
-        stamp = datetime.today().strftime('%Y%m%d-%H%M')
-        f2.write(f'#define btime "{stamp}"\n')
-        if build_num_manual_override != "SPECIAL_NO":
-            f2.write(f'#define bnum "{str(build_num_manual_override)}"\n')
-        else:
-            f2.write(f'#define bnum "{str(bnum + 1)}.0"\n')
+    if ospath.isfile(dname + '/../src/base/sdk/system/osver.h'):
+        with open(dname + '/../src/base/sdk/system/osver.h') as f1:
+            lines = f1.readlines()
+            bnum = lines[-1]
+            bnum = bnum.strip()
+            bnum = bnum[17:]
+            bnum = bnum[:-1]
+            bnum = int(float(bnum))
+        with open(dname + '/../src/base/sdk/system/osver.h', 'w') as f2:
+            f2.writelines(lines[:-5])
+            f2.write(f'#define bld_type "{configo.config}"\n')
+            f2.write(f'#define bld_lab "{popen("git symbolic-ref --short HEAD").read().strip()}"\n')
+            f2.write(f'#define bld_arch "{configo.arch}"\n')
+            stamp = datetime.today().strftime('%Y%m%d-%H%M')
+            f2.write(f'#define bld_time "{stamp}"\n')
+            if build_num_manual_override != "SPECIAL_NO":
+                f2.write(f'#define bld_num "{str(build_num_manual_override)}"\n')
+            else:
+                f2.write(f'#define bld_num "{str(bnum + 1)}.0"\n')
+    else:
+        with open(dname + '/../src/base/sdk/system/osver.h', 'w') as f2:
+            f2.write('/* osver.h\n')
+            f2.write(' * Automatically generated\n')
+            f2.write(' * Codename "Esaul" Operating System\n')
+            f2.write(' * Copyright (c) 2023 - SkylightOS Project\n')
+            f2.write('*/\n')
+            f2.write('\n')
+            f2.write('// DO NOT TOUCH LINES BELOW - AUTOMATICALLY GENERATED //\n')
+            f2.write(f'#define bld_type "{configo.config}"\n')
+            f2.write(f'#define bld_lab "{popen("git symbolic-ref --short HEAD").read().strip()}"\n')
+            f2.write(f'#define bld_arch "{configo.arch}"\n')
+            stamp = datetime.today().strftime('%Y%m%d-%H%M')
+            f2.write(f'#define bld_time "{stamp}"\n')
+            if build_num_manual_override != "SPECIAL_NO":
+                f2.write(f'#define bld_num "{str(build_num_manual_override)}"\n')
+            else:
+                f2.write(f'#define bld_num "1.0"\n')
 
 exit(0)

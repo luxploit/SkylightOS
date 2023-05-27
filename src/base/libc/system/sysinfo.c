@@ -7,12 +7,12 @@
 #include <sysinfo.h>
 #include <system/osver.h>
 
-struct systeminfo sysinfo() {
-	struct systeminfo info;
-	info.buildnum = bnum;
-	info.buildtype = btype;
-	info.buildlab = lab;
-	info.cpuarch = barch;
-	info.builddate = btime;
+systeminfo sysinfo() {
+	systeminfo info;
+	info.buildnum = bld_num;
+	info.buildtype = bld_type;
+	info.buildlab = bld_lab;
+	info.cpuarch = bld_arch;
+	info.builddate = bld_time;
 	return info;
 }

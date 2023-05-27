@@ -4,6 +4,7 @@ publish/sysroot/
 publish/skylight.iso
 build/__pycache__
 tools/__pycache__
+src/base/sdk/system/osver.h
 toolchain/
 .ninja_log
 .sconsign.dblite
