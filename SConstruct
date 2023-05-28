@@ -1,15 +1,25 @@
 from pathlib import Path
+from shutil import which
+from sys import exit
+from subprocess import *
+from os import *
 from SCons.Variables import *
 from SCons.Environment import *
 from SCons.Node import *
 
-vars = Variables('config.py', ARGUMENTS) #type: ignore
+toollist = ['nasm', 'clang', 'clang++']
+for tool in toollist:
+    tempvar = which(tool)
+    if tempvar is None:
+        print(f'ERR: required tool {tool} was not found')
+        exit(1)
+
+vars = Variables('build/config.py', ARGUMENTS) #type: ignore
 vars.AddVariables(
     EnumVariable('config', help='Build Configuration', default='chk', allowed_values=('chk', 'fre')),
     EnumVariable('arch', help='Target Architecture', default='ia32', allowed_values=('ia32')),
     EnumVariable('image', help='Image Type', default='bin', allowed_values=('iso', 'bin'))
 )
-vars.Add('toolchain', help='Toolchain Path', default='/usr/local/bin/cross')
 
 hostenv = Environment(variables=vars,
     ENV=os.environ,
@@ -36,15 +46,52 @@ platform_prefix = ''
 if hostenv['arch'] == 'ia32':
     platform_prefix = 'i686-elf'
 
-toolchain_dir = Path(hostenv['toolchain']).resolve()
-toolchain_bin = Path(toolchain_dir, 'bin')
+print("[GEN]    Generating  [src/base/sdk/system/osver.h]")
+call(["python3", "tools/update_osver.py", "update"])
+
+toollist = [f'{platform_prefix}-ld', f'{platform_prefix}-strip']
+is_binutils_built_locally = False
+if not which(f'toolchain/toolchain-binaries/bin/{toollist[0]}') is None or not which(f'toolchain/toolchain-binaries/bin/{toollist[1]}') is None:
+    is_binutils_built_locally = True
+    binpath = Path('toolchain').resolve()
+    binpath = Path(binpath, 'toolchain-binaries')
+    binpath = Path(binpath, 'bin')
+elif which(toollist[0]) is None or which(toollist[1]) is None:
+    print(f'ERR: {platform_prefix} binutils not found or incomplete')
+    print('Should we attempt to build it? (y if you agree, any other input if not)')
+    answer = input()
+    if answer != 'y':
+        print(f'Please install {platform_prefix} binutils and rerun scons.')
+        exit(1)
+    print('Alright, attempting to build binutils')
+    os.chdir(f'{os.getcwd()}/tools')
+    popen = Popen(['bash', 'build_binutils.sh'], stdout=PIPE, universal_newlines=True)
+    for line in iter(popen.stdout.readline, ""):
+        print(line, end='')
+    popen.stdout.close()
+    return_code = popen.wait()
+    if return_code:
+        print('ERR: unable to build binutils! Please review previous output and repair failure.')
+        exit(1)
+    is_binutils_built_locally = True
+    binpath = Path('..').resolve()
+    binpath = Path(binpath, 'toolchain')
+    binpath = Path(binpath, 'toolchain-binaries')
+    binpath = Path(binpath, 'bin')
+
+if is_binutils_built_locally:
+    linker = f'{binpath}/{platform_prefix}-ld'
+    striptool = f'{binpath}/{platform_prefix}-strip'
+else:
+    linker=f'{platform_prefix}-ld'
+    striptool = f'{platform_prefix}-strip'
 
 targetenv = hostenv.Clone(
     AS='nasm',
     CC = 'clang',
     CXX = 'clang++',
-    LINK = f'{toolchain_bin}/{platform_prefix}-ld',
-    STRIP = f'{toolchain_bin}/{platform_prefix}-strip',
+    LINK = linker,
+    STRIP = striptool,
 
     CFLAGS = ['-std=gnu99'],
     CXXFLAGS = ['-std=gnu++03', '-fno-exceptions', '-fno-rtti'],

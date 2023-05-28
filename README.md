@@ -6,6 +6,8 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/EthernalRaine/SkylightOS?style=plastic)
 ![Lines of code](https://img.shields.io/tokei/lines/github/EthernalRaine/SkylightOS?style=plastic)
 
+*The current total lines of code counter is broken due to img.shields.io issues*
+
 </div>
 
 *Current Codename: Esaul*
@@ -19,20 +21,18 @@ For a roadmap on Skylight's development, check the [SkylightOS Milestone Roadmap
 <br>
 
 ## Build Instructions
-For instructions on how to build GCC for your target architecture, check [GCC Build Docs](docs/building_gcc.md)
-
 Prerequisites:
 * Git
 * Python 3.10+
 * QEMU
 * Netwide Assembler
-* GCC for target arch
+* Clang
 * GDB for target arch 
-* Binutils
+* Binutils for target arch (automatically compiled if you don't have it)
 * GRUB2
 * Scons (installable via pip)
 
-For build instructions, check [SkylightOS Build Docs](docs/building_skylightos.md) for a list of all targets and architectures or browse the [docs/architectures](docs/architectures/) folder directly.
+For build instructions, check [SkylightOS Build Docs](docs/compiling_skylightos.md) for a list of all targets and architectures or browse the [docs/architectures](docs/architectures/) folder directly.
 
 <br>
 
