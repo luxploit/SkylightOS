@@ -48,8 +48,7 @@ or
 
 To boot the kernel via grub from the ISO, run:
 ```bash
-(qemu for your architecture) -cdrom publish/skylight.iso                    # debug build
+(qemu for your architecture) -cdrom publish/skylight.iso                    # build type automatically detected during iso build
 ```
-*there are no retail iso builds as of now*
 
 Congrats, you've successfully built SkylightOS.
