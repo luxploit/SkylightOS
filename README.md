@@ -18,8 +18,6 @@ SkylightOS is a small, portable and extensible RTOS designed for a multitude of 
 
 For a roadmap on Skylight's development, check the [SkylightOS Milestone Roadmap](https://github.com/users/EthernalRaine/projects/2)
 
-<br>
-
 ## Build Instructions
 Prerequisites:
 * Git
@@ -33,8 +31,6 @@ Prerequisites:
 * Scons (installable via pip)
 
 For build instructions, check [SkylightOS Build Docs](docs/compiling_skylightos.md) for a list of all targets and architectures or browse the [docs/architectures](docs/architectures/) folder directly.
-
-<br>
 
 ## License
 <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
