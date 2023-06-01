@@ -6,7 +6,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/EthernalRaine/SkylightOS?style=plastic)
 ![Lines of code](https://img.shields.io/tokei/lines/github/EthernalRaine/SkylightOS?style=plastic)
 
-*The current total lines of code counter is broken due to img.shields.io issues*
+*The current total lines of code counter is intermittently broken, upstream from shields.io*
 
 </div>
 
