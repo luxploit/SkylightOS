@@ -17,7 +17,7 @@ else
 fi
 
 if ! ( [[ $version =~ "2." || $version =~ "1.9" ]] ) then
-   echo "GRUB2 is required"
+   echo "ERR: GRUB2 is required"
    exit 1
 fi
 
