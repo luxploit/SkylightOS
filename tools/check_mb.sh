@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [ ! -f ./SConstruct ]; then
-  echo "You are not running this script from the SkylightOS root directory. Please change to the SkylightOS root directory."
-  exit 1
+   echo "You are not running this script from the SkylightOS root directory. Please change to the SkylightOS root directory."
+   exit 1
 fi
 
 if [ -x "$(command -v grub2-install)" ]; then
