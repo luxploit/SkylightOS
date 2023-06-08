@@ -25,10 +25,6 @@ rm -rf $TOOLCHAIN_PWD
 mkdir $TOOLCHAIN_PWD
 cd $TOOLCHAIN_PWD
 
-# cleanup
-echo "Cleaning up any possible remains of previous builds..."
-rm -rf binutils-${BINUTILS_VERSION} binutils-compile
-
 # actual compile
 echo "Compiling binutils for ${TARGET} version ${BINUTILS_VERSION}..."
 
