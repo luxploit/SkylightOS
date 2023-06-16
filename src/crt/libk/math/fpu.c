@@ -4,10 +4,10 @@
  * Copyright (c) 2023 - SkylightOS Project
 */
 
-char* _esaul_nofpu() {
-    return "0";
+int _esaul_nofpu() {
+    return 0;
 }
 
-char* _esaul_hasfpu() {
-    return "1";
+int _esaul_hasfpu() {
+    return 1;
 }

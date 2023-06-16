@@ -34,10 +34,10 @@ void _esaul_kernel_entry() {
     kputs("Welcome to SkylightOS!");
     kputs("Sponsored by clang-15 /s");
 
-    if (detectfpu() == "0") {
+    if (detectfpu() == 0) {
         kputs("No FPU detected");
         dowehavefpu = 0;
-    } else if (detectfpu() == "1") {
+    } else if (detectfpu() == 1) {
         kputs("FPU detected, good");
         dowehavefpu = 1;
     } else {
