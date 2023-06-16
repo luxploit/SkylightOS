@@ -5,17 +5,16 @@
 */
 
 /*
-; Set Information about OS in rodata
 section .rodata
     esos_arch       db  "IA32", 0           ; OS rchitecture Information
     esos_version    db  "0.0.0.0"           ; OS Build Version Numbering
     esos_codename   db  "Esaul"             ; OS Working Title Codename
-    esos_debug      db  "master(raine)"     ; Misc. OS Information set by the Daytona Env Console
+    esos_debug      db  "master(raine)"     ; Misc. OS Information
 
 ; A full version string looks something like this (stolen from microsoft):
 ; 4.0.2456.2.mips64le(fre).private/mips_speed(skvbl03).20280305-1800
 ; Major.Minor.Build.Revision.Architecture(Config Suffix).Branch(builduser).YYYYMMDD-HHMM
-; this is found in src/base/esos/osbuild.h
+; this is found in src/crt/sdk/system/osver.h
 */
 
 #include <kernel/panic.h>
@@ -24,16 +23,17 @@ section .rodata
 #include <kernel/debug/klog.h>
 #include <sysinfo.h>
 
+#include "test.h"
+
 void _esaul_kernel_entry() {
+
     terminal_initialize();
     kputs("Welcome to SkylightOS!");
     kputs("Sponsored by clang-15 /s");
-    kprintf("%s%s%s%s%s%s%s%s%s%s\n", "SkylightOS build 1.0.", sysinfo().buildnum, ".", sysinfo().cpuarch, "(", sysinfo().buildtype, ").", sysinfo().buildlab, ".", sysinfo().builddate);
-    klog_info("test", "this is an info");
-    klog_warning("test", "this is a warning");
-    klog_error("test", "this is an error");
-    klog_debug("test", "this is a debug message");
-    klog_fatal("test", "this is a fatal error");
+    
+    sysinfo_display();
+
+    test_logger();
 
     panic();
 }

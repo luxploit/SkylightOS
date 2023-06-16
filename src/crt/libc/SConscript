@@ -1,13 +1,13 @@
 from SCons.Environment import Environment
 
-Import("targetenv") #type:ignore
+Import("targetenv") 
 targetenv : Environment
 
 buildenv = targetenv.Clone()
 buildenv.Append(
     CPPPATH = [ 
         buildenv.Dir('.').srcnode(),
-        buildenv['PROJECTDIR'].Dir('src/base/sdk')
+        buildenv['PROJECTDIR'].Dir('src/crt/sdk')
     ],
 )
 
@@ -23,4 +23,4 @@ libc_sources = [
 libc_objects = buildenv.Object(libc_sources)
 libc = buildenv.StaticLibrary('libc.o', libc_objects)
 
-Export('libc') #type:ignore
+Export('libc')

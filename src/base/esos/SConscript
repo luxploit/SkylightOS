@@ -2,14 +2,14 @@ import os
 from SCons.Environment import Environment
 from build.utility import FindIndex, IsFileName
 
-Import("targetenv") #type:ignore
+Import("targetenv")
 targetenv : Environment
 
 buildenv = targetenv.Clone()
 buildenv.Append(
     CPPPATH = [ 
         buildenv.Dir('.').srcnode(),
-        buildenv['PROJECTDIR'].Dir('src/base/sdk')
+        buildenv['PROJECTDIR'].Dir('src/crt/sdk')
     ],
     LINKFLAGS = [
         '-T', buildenv.File('linker.ld').srcnode().path,
@@ -17,18 +17,8 @@ buildenv.Append(
 )
 
 esos_sources = [
-    'klibc/debug/klog.c',
-    'klibc/debug/kprintf.c',
-    'klibc/debug/kputs.c',
-    'klibc/io/inx.c',
-    'klibc/io/outx.c',
-    'klibc/io/wait.c',
-    'klibc/terminal/cursor.c',
-    'klibc/terminal/tty.c',
-    'klibc/terminal/vga.c',
-    'klibc/panic.c',
-    'osbuild.c',
-    'ekernel.c'
+    'ekernel.c',
+    "test.c"
 ]
 
 if targetenv['arch'] == 'ia32':
@@ -41,9 +31,11 @@ entry_object = esos_objects.pop(FindIndex(esos_objects, lambda item: IsFileName(
 #crti_object = esos_objects.pop(FindIndex(esos_objects, lambda item: IsFileName(item, 'crti.o')))
 #crtn_object = esos_objects.pop(FindIndex(esos_objects, lambda item: IsFileName(item, 'crtn.o')))
 
-Import('libc')  #type:ignore
+Import('libk')  
+Import('libc')  
 static_libs = [
-    libc        #type:ignore
+    libk,
+    libc       
 ]
 
 esos_objects = [
@@ -64,5 +56,5 @@ if targetenv['config'] == 'fre':
 else:
     buildenv.Default(kernel)
 
-Export('kernel')            #type:ignore
-Export('kernel_stripped')   #type:ignore
+Export('kernel')            
+Export('kernel_stripped')  

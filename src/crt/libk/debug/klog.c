@@ -15,9 +15,12 @@
 #include <kernel/terminal/tty.h>
 #include <kernel/terminal/vga.h>
 
-void k_internal_print(enum vga_color color, const char* module, const char* message, va_list args) {
+void k_internal_print(enum vga_color color, const char* module, const char* message, va_list args) {   
+    kprintf("[ ");
     terminal_setcolor(vga_entry_color(color, VGA_COLOR_BLACK));
-    kprintf("[%s] -> %s\n", module, message);
+    kprintf("%s", module);
+    terminal_setcolor(vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK));
+    kprintf(" ] %s\n", message);
     //TODO: Implement sprintf to handle va_list
 }
 
@@ -31,7 +34,7 @@ void klog_info(const char* module, const char* message, ...) {
 void klog_warning(const char* module, const char* message, ...) {
     va_list args;
     va_start(args, message);
-    k_internal_print(VGA_COLOR_GREEN, module, message, args);
+    k_internal_print(VGA_COLOR_LIGHT_RED | VGA_COLOR_LIGHT_GREEN, module, message, args);
     va_end(args);
 }
 
@@ -45,7 +48,7 @@ void klog_error(const char* module, const char* message, ...) {
 void klog_debug(const char* module, const char* message, ...) {
     va_list args;
     va_start(args, message);
-    k_internal_print(VGA_COLOR_LIGHT_CYAN, module, message, args);
+    k_internal_print(VGA_COLOR_CYAN, module, message, args);
     va_end(args);
 }
 

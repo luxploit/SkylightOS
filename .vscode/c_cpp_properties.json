@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/src/base/sdk"
+                "${workspaceFolder}/src/crt/sdk"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

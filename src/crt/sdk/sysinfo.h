@@ -4,17 +4,19 @@
  * Copyright (c) 2023 - SkylightOS Project
 */
 
-
 typedef struct {
 	// the reason why buildnum is a char and not an int
 	// is becausw we will later need to concatenate it with an str
 	// and i don't feel like implementing snprintf for this
         //char[4] buildnum;
+	char *buildmajorminor;
 	char *buildnum;
 	char *buildtype;
 	char *buildlab;
+	char *builduser;
 	char *cpuarch;
 	char *builddate;
 } systeminfo;
 
 systeminfo sysinfo();
+void sysinfo_display();
