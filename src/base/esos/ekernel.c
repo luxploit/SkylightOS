@@ -22,15 +22,29 @@ section .rodata
 #include <kernel/debug/kstdio.h>
 #include <kernel/debug/klog.h>
 #include <sysinfo.h>
+#include <kernel/fpu.h>
 
 #include "test.h"
+
+int dowehavefpu = 0;
 
 void _esaul_kernel_entry() {
 
     terminal_initialize();
     kputs("Welcome to SkylightOS!");
     kputs("Sponsored by clang-15 /s");
-    
+
+    if (detectfpu() == 0) {
+        kputs("No FPU detected");
+        dowehavefpu = 0;
+    } else if (detectfpu() == 1) {
+        kputs("FPU detected, good");
+        dowehavefpu = 1;
+    } else {
+        kputs("Inconsistent kernel state!");
+        panic();
+    }
+
     sysinfo_display();
 
     test_logger();

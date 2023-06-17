@@ -18,6 +18,8 @@ libk_sources = [
     'io/inx.c',
     'io/outx.c',
     'io/wait.c',
+    'math/detectfpu.asm',
+    'math/fpu.c',
     'terminal/cursor.c',
     'terminal/tty.c',
     'terminal/vga.c',
