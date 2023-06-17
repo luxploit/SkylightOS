@@ -66,7 +66,7 @@ elif argv[1] == "update":
             bnum = bnum[:-1]
             bnum = int(float(bnum))
         with open(dname + '/../src/crt/sdk/system/osver.h', 'w') as f2:
-            f2.writelines(lines[:-5])
+            f2.writelines(lines[:-7])
             f2.write(f'#define bld_type "{configo.config}"\n')
             f2.write(f'#define bld_lab "{popen("git symbolic-ref --short HEAD").read().strip()}"\n')
             f2.write(f'#define bld_arch "{configo.arch}"\n')
@@ -92,7 +92,7 @@ elif argv[1] == "update":
             f2.write(' * Copyright (c) 2023 - SkylightOS Project\n')
             f2.write('*/\n')
             f2.write('\n')
-            f2.write('// DO NOT TOUCH LINES BELOW - AUTOMATICALLY GENERATED //\n')
+            f2.write('// DO NOT TOUCH LINES BELOW - AUTOMATICALLY GENERATED - DO NOT DELETE, EVER!//\n')
             f2.write(f'#define bld_type "{configo.config}"\n')
             f2.write(f'#define bld_lab "{popen("git symbolic-ref --short HEAD").read().strip()}"\n')
             f2.write(f'#define bld_arch "{configo.arch}"\n')
