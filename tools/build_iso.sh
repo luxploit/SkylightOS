@@ -2,9 +2,8 @@
 
 # update_osver.py
 # Created on Thu May 4 2023 by Laura Raine (lnkexploit)
-# Codename "Esaul" Operating System
+# Adding During Codename Phase: "Esaul"
 # Copyright (c) 2023 - SkylightOS Project
-
 
 if [ ! -f ./SConstruct ]; then
    echo "You are not running this script from the SkylightOS root directory. Please change to the SkylightOS root directory."

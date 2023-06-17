@@ -1,6 +1,6 @@
 /* sysinfo.c
  * Created on Thu May 25 2023 by Seal Sealy (seal331)
- * Codename "Esaul" Operating System
+ * Adding During Codename Phase: "Esaul"
  * Copyright (c) 2023 - SkylightOS Project
 */
 
@@ -11,6 +11,7 @@
 
 systeminfo sysinfo() {
 	systeminfo info;
+	info.buildcodename = bld_codename;
 	info.buildmajorminor = bld_majorminor;
 	info.buildnum = bld_num;
 	info.buildtype = bld_type;

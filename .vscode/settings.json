@@ -6,6 +6,8 @@
         "stddef.h": "c",
         "klog.h": "c",
         "fpu.h": "c",
-        "test.h": "c"
+        "test.h": "c",
+        "osver.h": "c",
+        "sysinfo.h": "c"
     }
 }

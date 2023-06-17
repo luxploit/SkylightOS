@@ -1,6 +1,6 @@
 ; crtn.asm
 ; Created on Tue Apr 04 2023 by Laura Raine (lnkexploit)
-; Codename "Esaul" Operating System
+; Adding During Codename Phase: "Esaul"
 ; Copyright (c) 2023 - SkylightOS Project
 
 section .init

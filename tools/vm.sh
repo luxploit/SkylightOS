@@ -2,7 +2,7 @@
 
 # update_osver.py
 # Created on Mon March 27 2023 by Laura Raine (lnkexploit)
-# Codename "Esaul" Operating System
+# Adding During Codename Phase: "Esaul"
 # Copyright (c) 2023 - SkylightOS Project
 
 if [ ! -f ./SConstruct ]; then
