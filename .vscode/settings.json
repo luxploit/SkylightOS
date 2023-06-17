@@ -4,6 +4,8 @@
         "cdefs.h": "c",
         "limits.h": "c",
         "stddef.h": "c",
-        "klog.h": "c"
+        "klog.h": "c",
+        "fpu.h": "c",
+        "test.h": "c"
     }
 }
