@@ -1,5 +1,10 @@
 # Concept of Components
 
-Components are divided into Groups and Nodes, with nodes having owners and groups collectively pooling similar components. Folders that have a depth of one (ie. base) are component groups and Folders that have a depth of two are component nodes. Some components with a depth of zero are called Root Components, things like tools, docs or build.
+Components are Groups, with groups having owners, collectively pooling similar components.
+Ideally each component has its own Owner, who is responsible for it, however this is not always the case since this we're not a company.
 
-Ideally each component has its own Owner, who is responable
+A list of the current components (and owners, if applicable) include:
+* core (EthernalRaine) - Essential OS compontent group
+* com (EthernalRaine) - Any kind of user input communication
+* docs (EthernalRaine) - Documentation, self-explanitory
+* build (seal331) - Toolchain and Build System
