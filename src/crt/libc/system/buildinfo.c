@@ -1,29 +1,29 @@
-/* sysinfo.c
+/* buildinfo.c
  * Created on Thu May 25 2023 by Seal Sealy (seal331)
- * Adding During Codename Phase: "Esaul"
+ * Added for Codename: "Esaul"
  * Copyright (c) 2023 - SkylightOS Project
 */
 
-#include <sysinfo.h>
+#include <system/buildinfo.h>
 #include <system/osver.h>
 #include <kernel/debug/klog.h>
 #include <kernel/debug/kstdio.h>
 
-systeminfo sysinfo() {
-	systeminfo info;
-	info.buildcodename = bld_codename;
-	info.buildmajorminor = bld_majorminor;
-	info.buildnum = bld_num;
-	info.buildtype = bld_type;
-	info.buildlab = bld_lab;
-	info.builduser = bld_user;
-	info.cpuarch = bld_arch;
-	info.builddate = bld_time;
+build_info buildinfo_get() {
+	build_info info;
+
+	info.build_architecture = bld_arch;
+	info.build_codename = bld_codename;
+	info.build_date = bld_time;
+	info.build_lab = bld_lab;
+	info.build_type = bld_type;
+	info.build_version = bld_version;
+
 	return info;
 }
 
-void sysinfo_display() {
-	systeminfo sys_info = sysinfo();
+void buildinfo_display() {
+	build_info bld_info = buildinfo_get();
 
 	if (sys_info.builduser != "__OFFICIAL__") {
 		kprintf("SkylightOS - Build %s.%s.%s(%s).%s(%s).%s\n", 

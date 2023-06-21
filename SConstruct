@@ -1,3 +1,5 @@
+# type: ignore
+
 from pathlib import Path
 from shutil import which
 from sys import exit
@@ -14,7 +16,7 @@ for tool in toollist:
         print(f'ERR: required tool {tool} was not found')
         exit(1)
 
-vars = Variables('build/config.py', ARGUMENTS) 
+vars = Variables('tools/build/config.py', ARGUMENTS) 
 vars.AddVariables(
     EnumVariable('config', help='Build Configuration', default='chk', allowed_values=('chk', 'fre')),
     EnumVariable('arch', help='Target Architecture', default='ia32', allowed_values=('ia32')),

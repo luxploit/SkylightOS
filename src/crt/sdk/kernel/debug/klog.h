@@ -1,6 +1,6 @@
 /* klog.h
  * Created on Wed Apr 12 2023 by Laura Raine (lnkexploit)
- * Adding During Codename Phase: "Esaul"
+ * Added for Codename: "Esaul"
  * Copyright (c) 2023 - SkylightOS Project
 */
 

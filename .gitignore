@@ -1,8 +1,8 @@
 bin/
-build/ia32_chk
+tools/build/ia32_chk
 publish/sysroot/
 publish/skylight.iso
-build/__pycache__
+tools/build/__pycache__
 tools/__pycache__
 toolchain/
 .ninja_log

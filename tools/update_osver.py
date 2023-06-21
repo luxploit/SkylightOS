@@ -2,7 +2,7 @@
 
 # update_osver.py
 # Created on Tue May 23 2023 by Seal Sealy (seal331)
-# Adding During Codename Phase: "Esaul"
+# Added for Codename: "Esaul"
 # Copyright (c) 2023 - SkylightOS Project
 
 from os import chdir, popen
@@ -46,7 +46,7 @@ if argv[1] == "read":
     with open(dname + "/../src/crt/sdk/system/osver.h", "a+") as osver_h:
         osver_h.seek(0)
         lines = osver_h.readlines()
-        line = lines[8]
+        line = lines[10]
         if "fre" in line:
             print("fre")
             exit(0)
@@ -61,13 +61,13 @@ elif argv[1] == "update":
     if ospath.isfile(dname + '/../src/crt/sdk/system/osver.h'):
         with open(dname + '/../src/crt/sdk/system/osver.h') as f1:
             lines = f1.readlines()
-            bnum = lines[-1]
+            bnum = lines[8]
             bnum = bnum.strip()
             bnum = bnum[17:]
             bnum = bnum[:-1]
             bnum = int(float(bnum))
         with open(dname + '/../src/crt/sdk/system/osver.h', 'w') as f2:
-            f2.writelines(lines[:-8])
+            f2.writelines(lines[:-12])
             f2.write(f'#define bld_type "{configo.config}"\n')
             f2.write(f'#define bld_lab "{popen("git symbolic-ref --short HEAD").read().strip()}"\n')
             f2.write(f'#define bld_arch "{configo.arch}"\n')
@@ -83,14 +83,14 @@ elif argv[1] == "update":
                     break
             f2.write(f'#define bld_codename "{str(codename)}"\n')
             if build_num_manual_override != "SPECIAL_NO":
-                f2.write(f'#define bld_num "{str(build_num_manual_override)}"\n')
+                f2.write(f'#define __internal_bld_num "{str(build_num_manual_override)}"\n')
             else:
-                f2.write(f'#define bld_num "{str(bnum + 1)}.0"\n')
+                f2.write(f'#define __internal_bld_num "{str(bnum + 1)}.0"\n')
     else:
         with open(dname + '/../src/crt/sdk/system/osver.h', 'w') as f2:
             f2.write('/* osver.h\n')
             f2.write(' * Automatically Generated\n')
-            f2.write(' * Adding During Codename Phase: "Esaul"\n')
+            f2.write(' * Added for Codename: "Esaul"\n')
             f2.write(' * Copyright (c) 2023 - SkylightOS Project\n')
             f2.write('*/\n')
             f2.write('\n')
@@ -110,7 +110,7 @@ elif argv[1] == "update":
                     break
             f2.write(f'#define bld_codename "{str(codename)}"\n')
             if build_num_manual_override != "SPECIAL_NO":
-                f2.write(f'#define bld_num "{str(build_num_manual_override)}"\n')
+                f2.write(f'#define __internal_bld_num "{str(build_num_manual_override)}"\n')
             else:
-                f2.write(f'#define bld_num "1.0"\n')
+                f2.write(f'#define __internal_bld_num "1.0"\n')
 exit(0)
