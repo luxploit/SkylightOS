@@ -1,3 +1,5 @@
+# type: ignore
+
 from pathlib import Path
 from shutil import which
 from sys import exit
@@ -7,14 +9,14 @@ from SCons.Variables import *
 from SCons.Environment import *
 from SCons.Node import *
 
-toollist = ['nasm', 'clang', 'clang++']
+toollist = ['nasm', 'clang', 'clang++', 'strip']
 for tool in toollist:
     tempvar = which(tool)
     if tempvar is None:
         print(f'ERR: required tool {tool} was not found')
         exit(1)
 
-vars = Variables('build/config.py', ARGUMENTS) #type: ignore
+vars = Variables('tools/build/config.py', ARGUMENTS) 
 vars.AddVariables(
     EnumVariable('config', help='Build Configuration', default='chk', allowed_values=('chk', 'fre')),
     EnumVariable('arch', help='Target Architecture', default='ia32', allowed_values=('ia32')),
@@ -41,62 +43,26 @@ if hostenv['config'] == 'chk':
 else :
     hostenv.Append(CCFLAGS = ['-O2'])
 
+# this is just temp, we use Clang/LLVM
+match hostenv['arch']:
+    case 'ia32':
+        platform_prefix = 'i686-elf'
 
-platform_prefix = ''
-if hostenv['arch'] == 'ia32':
-    platform_prefix = 'i686-elf'
 
-print("[GEN]    Generating  [src/base/sdk/system/osver.h]")
-call(["python3", "tools/update_osver.py", "update"])
-
-toollist = [f'{platform_prefix}-ld', f'{platform_prefix}-strip']
-is_binutils_built_locally = False
-if not which(f'toolchain/toolchain-binaries/bin/{toollist[0]}') is None or not which(f'toolchain/toolchain-binaries/bin/{toollist[1]}') is None:
-    is_binutils_built_locally = True
-    binpath = Path('toolchain').resolve()
-    binpath = Path(binpath, 'toolchain-binaries')
-    binpath = Path(binpath, 'bin')
-elif which(toollist[0]) is None or which(toollist[1]) is None:
-    print(f'ERR: {platform_prefix} binutils not found or incomplete')
-    print('Should we attempt to build it? (y if you agree, any other input if not)')
-    answer = input()
-    if answer != 'y':
-        print(f'Please install {platform_prefix} binutils and rerun scons.')
-        exit(1)
-    print('Alright, attempting to build binutils')
-    os.chdir(f'{os.getcwd()}/tools')
-    popen = Popen(['bash', 'build_binutils.sh'], stdout=PIPE, universal_newlines=True)
-    for line in iter(popen.stdout.readline, ""):
-        print(line, end='')
-    popen.stdout.close()
-    return_code = popen.wait()
-    if return_code:
-        print('ERR: unable to build binutils! Please review previous output and repair failure.')
-        exit(1)
-    is_binutils_built_locally = True
-    binpath = Path('..').resolve()
-    binpath = Path(binpath, 'toolchain')
-    binpath = Path(binpath, 'toolchain-binaries')
-    binpath = Path(binpath, 'bin')
-
-if is_binutils_built_locally:
-    linker = f'{binpath}/{platform_prefix}-ld'
-    striptool = f'{binpath}/{platform_prefix}-strip'
-else:
-    linker=f'{platform_prefix}-ld'
-    striptool = f'{platform_prefix}-strip'
+print("[GEN]    Generating  [src/crt/sdk/system/osver.h]")
+call(["python3", "tools/build/new_osver.py", "update"])
 
 targetenv = hostenv.Clone(
     AS='nasm',
     CC = 'clang',
     CXX = 'clang++',
-    LINK = linker,
-    STRIP = striptool,
+    LINK = 'ld.lld',
+    STRIP = 'strip',
 
     CFLAGS = ['-std=gnu99'],
     CXXFLAGS = ['-std=gnu++03', '-fno-exceptions', '-fno-rtti'],
     CCFLAGS = ['-ffreestanding', '-Wall', '-Wextra', '-nostdlib', '-fno-builtin'],
-    LINKFLAGS = ['-nostdlib', '-static', '-z', 'max-page-size=4096', '-z', 'noexecstack'],
+    LINKFLAGS = ['-nostdlib', '-static', '-z', 'max-page-size=4096', '-z', 'noexecstack', '--build-id=none'],
 
     PROJECTDIR = hostenv.Dir('.').srcnode(),
 )
@@ -104,11 +70,12 @@ targetenv = hostenv.Clone(
 if targetenv['arch'] == 'ia32':
     targetenv.Append(ASFLAGS = ['-felf32'], CCFLAGS = ['--target=i686-pc-none-elf', '-march=i686'])
 
-Help(vars.GenerateHelpText(hostenv)) #type: ignore
-Export('hostenv')   #type: ignore
-Export('targetenv') #type: ignore
+Help(vars.GenerateHelpText(hostenv)) 
+Export('hostenv')   
+Export('targetenv') 
 
 build_dir= 'bin/{0}_{1}'.format(targetenv['arch'], targetenv['config'])
 
-SConscript('src/base/libc/SConscript', variant_dir=f'{build_dir}/base/libc', duplicate=0)    #type: ignore
-SConscript('src/base/esos/SConscript', variant_dir=f'{build_dir}/base/esos', duplicate=0)    #type: ignore
+SConscript('src/crt/libk/SConscript', variant_dir=f'{build_dir}/crt/libk', duplicate=0)    
+SConscript('src/crt/libc/SConscript', variant_dir=f'{build_dir}/crt/libc', duplicate=0)    
+SConscript('src/base/esos/SConscript', variant_dir=f'{build_dir}/base/esos', duplicate=0)    

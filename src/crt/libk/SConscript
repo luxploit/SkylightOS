@@ -1,0 +1,32 @@
+# type: ignore
+
+from SCons.Environment import Environment
+
+Import("targetenv") 
+targetenv : Environment
+
+buildenv = targetenv.Clone()
+buildenv.Append(
+    CPPPATH = [ 
+        buildenv.Dir('.').srcnode(),
+        buildenv['PROJECTDIR'].Dir('src/crt/sdk')
+    ],
+)
+
+libk_sources = [
+    'debug/klog.c',
+    'debug/kprintf.c',
+    'debug/kputs.c',
+    'io/inx.c',
+    'io/outx.c',
+    'io/wait.c',
+    'terminal/cursor.c',
+    'terminal/tty.c',
+    'terminal/vga.c',
+    'panic.c',
+]
+
+libk_objects = buildenv.Object(libk_sources)
+libk = buildenv.StaticLibrary('libk.o', libk_objects)
+
+Export('libk')

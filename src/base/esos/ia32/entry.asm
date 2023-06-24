@@ -1,6 +1,6 @@
 ; entry.asm
 ; Created on Sun Apr 02 2023 by Laura Raine (lnkexploit)
-; Codename "Esaul" Operating System
+; Added for Codename: "Esaul"
 ; Copyright (c) 2023 - SkylightOS Project
 
 ; Declare multiboot header constants

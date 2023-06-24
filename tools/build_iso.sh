@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# update_osver.py
+# Created on Thu May 4 2023 by Laura Raine (lnkexploit)
+# Added for Codename: "Esaul"
+# Copyright (c) 2023 - SkylightOS Project
+
 if [ ! -f ./SConstruct ]; then
    echo "You are not running this script from the SkylightOS root directory. Please change to the SkylightOS root directory."
    exit 1
@@ -27,7 +32,7 @@ rm -rf publish/sysroot
 rm -f publish/skylight.iso
 mkdir -p publish/sysroot/boot/grub
 cp publish/intrim/grub.cfg publish/sysroot/boot/grub
-cp bin/ia32_$(tools/update_osver.py read)/base/esos/chkernel.elf publish/sysroot/boot
+cp bin/$(tools/build/new_osver.py read_arch)_$(tools/build/new_osver.py read_config)/base/esos/$(tools/build/new_osver.py get_kernel) publish/sysroot/boot
 tools/check_mb.sh
 
-${prefix}mkrescue /usr/lib/grub/i386-pc -o publish/skylight.iso publish/sysroot
+${prefix}mkrescue /usr/share/grub2/i386-pc -o publish/skylight.iso publish/sysroot
