@@ -43,13 +43,14 @@ if hostenv['config'] == 'chk':
 else :
     hostenv.Append(CCFLAGS = ['-O2'])
 
+# this is just temp, we use Clang/LLVM
+match hostenv['arch']:
+    case 'ia32':
+        platform_prefix = 'i686-elf'
 
-platform_prefix = ''
-if hostenv['arch'] == 'ia32':
-    platform_prefix = 'i686-elf'
 
 print("[GEN]    Generating  [src/crt/sdk/system/osver.h]")
-call(["python3", "tools/update_osver.py", "update"])
+call(["python3", "tools/build/new_osver.py", "update"])
 
 targetenv = hostenv.Clone(
     AS='nasm',

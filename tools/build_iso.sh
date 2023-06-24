@@ -32,7 +32,7 @@ rm -rf publish/sysroot
 rm -f publish/skylight.iso
 mkdir -p publish/sysroot/boot/grub
 cp publish/intrim/grub.cfg publish/sysroot/boot/grub
-cp bin/ia32_$(tools/update_osver.py read)/base/esos/chkernel.elf publish/sysroot/boot
+cp bin/$(tools/build/new_osver.py read_arch)_$(tools/build/new_osver.py read_config)/base/esos/$(tools/build/new_osver.py get_kernel) publish/sysroot/boot
 tools/check_mb.sh
 
 ${prefix}mkrescue /usr/share/grub2/i386-pc -o publish/skylight.iso publish/sysroot

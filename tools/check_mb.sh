@@ -28,7 +28,7 @@ fi
 
 set -e
 
-if ${prefix}file --is-x86-multiboot publish/sysroot/boot/chkernel.elf; then
+if ${prefix}file --is-x86-multiboot publish/sysroot/boot/$(tools/build/new_osver.py get_kernel); then
 	echo kernel is multiboot confirmed
 else
 	echo kernel failed multiboot test!

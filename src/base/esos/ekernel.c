@@ -21,7 +21,8 @@ section .rodata
 #include <kernel/terminal/tty.h>
 #include <kernel/debug/kstdio.h>
 #include <kernel/debug/klog.h>
-#include <sysinfo.h>
+#include <system/buildinfo.h>
+#include <system/osver.h>
 
 #include "test.h"
 
@@ -31,7 +32,7 @@ void _esaul_kernel_entry() {
     kputs("Welcome to SkylightOS!");
     kputs("Sponsored by clang-15 /s");
     
-    sysinfo_display();
+    buildinfo_display();
 
     test_logger();
 

@@ -25,24 +25,11 @@ build_info buildinfo_get() {
 void buildinfo_display() {
 	build_info bld_info = buildinfo_get();
 
-	if (sys_info.builduser != "__OFFICIAL__") {
-		kprintf("SkylightOS - Build %s.%s.%s(%s).%s(%s).%s\n", 
-			sys_info.buildmajorminor, 
-			sys_info.buildnum, 
-			sys_info.cpuarch, 
-			sys_info.buildtype, 
-			sys_info.buildlab, 
-			sys_info.builduser,
-			sys_info.builddate
-		);
-	} else {
-		kprintf("SkylightOS - Build %s.%s.%s(%s).%s.%s\n", 
-			sys_info.buildmajorminor, 
-			sys_info.buildnum, 
-			sys_info.cpuarch, 
-			sys_info.buildtype, 
-			sys_info.buildlab, 
-			sys_info.builddate
-		);
-	}
+	kprintf("SkylightOS - Build %s.%s(%s).%s.%s\n", 
+		bld_info.build_version, 
+		bld_info.build_architecture,
+		bld_info.build_type,
+		bld_info.build_lab,
+		bld_info.build_date
+	);
 }
