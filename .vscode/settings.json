@@ -8,6 +8,7 @@
         "fpu.h": "c",
         "test.h": "c",
         "osver.h": "c",
-        "sysinfo.h": "c"
+        "sysinfo.h": "c",
+        "buildinfo.h": "c"
     }
 }

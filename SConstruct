@@ -1,3 +1,5 @@
+# type: ignore
+
 from pathlib import Path
 from shutil import which
 from sys import exit
@@ -14,7 +16,7 @@ for tool in toollist:
         print(f'ERR: required tool {tool} was not found')
         exit(1)
 
-vars = Variables('build/config.py', ARGUMENTS) 
+vars = Variables('tools/build/config.py', ARGUMENTS) 
 vars.AddVariables(
     EnumVariable('config', help='Build Configuration', default='chk', allowed_values=('chk', 'fre')),
     EnumVariable('arch', help='Target Architecture', default='ia32', allowed_values=('ia32')),
@@ -41,13 +43,14 @@ if hostenv['config'] == 'chk':
 else :
     hostenv.Append(CCFLAGS = ['-O2'])
 
+# this is just temp, we use Clang/LLVM
+match hostenv['arch']:
+    case 'ia32':
+        platform_prefix = 'i686-elf'
 
-platform_prefix = ''
-if hostenv['arch'] == 'ia32':
-    platform_prefix = 'i686-elf'
 
 print("[GEN]    Generating  [src/crt/sdk/system/osver.h]")
-call(["python3", "tools/update_osver.py", "update"])
+call(["python3", "tools/build/new_osver.py", "update"])
 
 targetenv = hostenv.Clone(
     AS='nasm',

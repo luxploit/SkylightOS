@@ -2,7 +2,7 @@
 
 # update_osver.py
 # Created on Mon March 27 2023 by Laura Raine (lnkexploit)
-# Adding During Codename Phase: "Esaul"
+# Added for Codename: "Esaul"
 # Copyright (c) 2023 - SkylightOS Project
 
 if [ ! -f ./SConstruct ]; then
@@ -28,7 +28,7 @@ fi
 
 set -e
 
-if ${prefix}file --is-x86-multiboot publish/sysroot/boot/chkernel.elf; then
+if ${prefix}file --is-x86-multiboot publish/sysroot/boot/$(tools/build/new_osver.py get_kernel); then
 	echo kernel is multiboot confirmed
 else
 	echo kernel failed multiboot test!

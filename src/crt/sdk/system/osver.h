@@ -1,16 +1,16 @@
 /* osver.h
  * Automatically Generated
- * Adding During Codename Phase: "Esaul"
+ * Added for Codename: "Esaul"
  * Copyright (c) 2023 - SkylightOS Project
 */
 
-// DO NOT TOUCH LINES BELOW - AUTOMATICALLY GENERATED - DO NOT DELETE, EVER! //
+// DO NOT TOUCH LINES BELOW - AUTOMATICALLY GENERATED - DO NOT DELETE, EVER!//
+
+#define __internal_bld_num "68"
 
 #define bld_type "chk"
-#define bld_lab "private/lld"
+#define bld_lab "private/build_info(raine)"
 #define bld_arch "ia32"
-#define bld_time "20230619-0119"
-#define bld_majorminor "1.0"
-#define bld_user "raine"
+#define bld_time "20230624-0416"
 #define bld_codename "Esaul"
-#define bld_num "58.0"
+#define bld_version "1.0.68.0"

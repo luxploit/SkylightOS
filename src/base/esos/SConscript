@@ -1,6 +1,8 @@
+# type: ignore
+
 import os
 from SCons.Environment import Environment
-from build.utility import FindIndex, IsFileName
+from tools.build.utility import FindIndex, IsFileName
 
 Import("targetenv")
 targetenv : Environment
