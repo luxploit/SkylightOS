@@ -50,13 +50,8 @@ esos_objects = [
     #crtn_object  
 ]
 
-kernel = buildenv.Program('chkernel.elf', esos_objects)
-kernel_stripped = buildenv.Command('ekernel.elf', kernel, '$STRIP -o $TARGET $SOURCE')
-
+kernel = buildenv.Program('ekernel.elf', esos_objects)
 if targetenv['config'] == 'fre':
-    buildenv.Default(kernel_stripped)
-else:
-    buildenv.Default(kernel)
+    kernel = buildenv.Command('ekernel.elf', kernel, '$STRIP -o $TARGET $SOURCE')
 
 Export('kernel')            
-Export('kernel_stripped')  

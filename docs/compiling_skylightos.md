@@ -1,13 +1,9 @@
 # Compiling SkylightOS
 
-Prerequsites:
-* Clang
-* Binutils
-* any VM software (QEMU preferred)
-* Python 3.11
-* Scons
-
-See [Configuring the Build Environment](configuring_buildenv.md) for instructions.
+To acquire the required dependencies, run:
+```bash
+tools/resolve_deps.sh
+```
 
 List of available platforms for SkylightOS:
 | Architecture | Configuration Name | QEMU Executable  | Status           |
@@ -29,7 +25,7 @@ or if you have scons installed via pip --user
 ~/.local/bin/scons
 ```
 
-This will create `chkernel.elf` for checked (chk) or `ekernel.elf` for retail (fre) builds. This can be run directly in QEMU however it is recommended to package it inside of an ISO file with GRUB2 as the bootloader (for now).
+This will create `ekernel.elf`. This can be run directly in QEMU however it is recommended to package it inside of an ISO file with GRUB2 as the bootloader (for now).
 
 To Create an ISO with GRUB2 pre-loaded, run the following command:
 ```bash
@@ -39,16 +35,12 @@ tools/build_iso.sh
 
 To boot the kernel directly, run:
 ```bash
-(qemu for your architecture) -kernel publish/sysroot/boot/chkernel.elf      # debug kernel
-```
-or
-```bash
-(qemu for your architecture) -kernel publish/sysroot/boot/ekernel.elf       # retail kernel
+(qemu for your architecture) -kernel publish/sysroot/boot/ekernel.elf     
 ```
 
 To boot the kernel via grub from the ISO, run:
 ```bash
-(qemu for your architecture) -cdrom publish/skylight.iso                    # build type automatically detected during iso build
+(qemu for your architecture) -cdrom publish/skylight.iso                    
 ```
 
 Congrats, you've successfully built SkylightOS.

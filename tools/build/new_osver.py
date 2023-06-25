@@ -5,7 +5,6 @@
 # Added for Codename: "Esaul"
 # Copyright (c) 2023 - SkylightOS Project
 
-from ast import literal_eval
 from datetime import datetime
 import config as esos_config
 from sys import argv
@@ -28,16 +27,14 @@ build_user_special_accounts = [
     "idk imma leave this empty"
 ]
 
-if len(argv) != 2:
-    print(f'Usage: {argv[0]} -> read | update')
-    exit(1)
-
 # change into the system root as the current working dir is tools/build
 chdir(current_directory_path)
 
-if not path.isfile('SConstruct'):
-   print('[Error]: You are not running from the OS root directory! Please rerun from the correct path.')
-   exit(1)
+def print_usage():
+    print(f'Usage: {argv[0]}:')
+    print(f'        read_config - readout os build config (fre/chk)')
+    print(f'        read_arch   - readout target architecture for build')
+    print(f'        update      - update osver.h for building')
 
 def write_define(name, value):
     return "#define {0} \"{1}\"\n".format(name, value)
@@ -54,15 +51,19 @@ def get_lab():
 def write_version():
     return "{0}.{1}.{2}.{3}".format(current_os_major_ver, current_os_minor_ver, current_build_number+1, current_os_revision)
 
+if not path.isfile('SConstruct'):
+   print('[Error]: You are not running from the OS root directory! Please rerun from the correct path.')
+   exit(1)
+
+if len(argv) != 2:
+    print_usage()
+    exit(1)
+
 match argv[1]:
     case "read_config":
         print(f'{esos_config.config}')    
     case "read_arch":
         print(f'{esos_config.arch}')
-    case "get_kernel":
-        match esos_config.config:
-            case "fre": print("ekernel.elf")
-            case "chk": print("chkernel.elf")
     case "update":
         if path.isfile(osver_header_location):
             with open(osver_header_location) as header:
@@ -91,4 +92,6 @@ match argv[1]:
                 new_header.write(write_define("bld_time", datetime.today().strftime('%Y%m%d-%H%M')))
                 new_header.write(write_define("bld_codename", current_os_codename))
                 new_header.write(write_define("bld_version", write_version()))
-                
+    case _:
+        print_usage()
+        exit(1)

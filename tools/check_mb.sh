@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# update_osver.py
+# check_mb.sh
 # Created on Mon March 27 2023 by Laura Raine (lnkexploit)
 # Added for Codename: "Esaul"
 # Copyright (c) 2023 - SkylightOS Project
@@ -28,7 +28,7 @@ fi
 
 set -e
 
-if ${prefix}file --is-x86-multiboot publish/sysroot/boot/$(tools/build/new_osver.py get_kernel); then
+if ${prefix}file --is-x86-multiboot publish/sysroot/boot/ekernel.elf; then
 	echo kernel is multiboot confirmed
 else
 	echo kernel failed multiboot test!

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# update_osver.py
+# build_iso.sh
 # Created on Thu May 4 2023 by Laura Raine (lnkexploit)
 # Added for Codename: "Esaul"
 # Copyright (c) 2023 - SkylightOS Project
@@ -21,6 +21,12 @@ else
    exit 1
 fi
 
+if [ -x "$(command -v zypper)" ] # dirty hack for grub path
+   mkpath = "/usr/share/grub2/i386-pc"
+else
+   mkpath = "/usr/lib/grub/i386-pc"
+fi
+
 if ! ( [[ $version =~ "2." || $version =~ "1.9" ]] ) then
    echo "ERR: GRUB2 is required"
    exit 1
@@ -32,7 +38,7 @@ rm -rf publish/sysroot
 rm -f publish/skylight.iso
 mkdir -p publish/sysroot/boot/grub
 cp publish/intrim/grub.cfg publish/sysroot/boot/grub
-cp bin/$(tools/build/new_osver.py read_arch)_$(tools/build/new_osver.py read_config)/base/esos/$(tools/build/new_osver.py get_kernel) publish/sysroot/boot
+cp bin/$(tools/build/new_osver.py read_arch)_$(tools/build/new_osver.py read_config)/base/esos/ekernel.elf publish/sysroot/boot
 tools/check_mb.sh
 
-${prefix}mkrescue /usr/share/grub2/i386-pc -o publish/skylight.iso publish/sysroot
+${prefix}mkrescue ${mkpath} -o publish/skylight.iso publish/sysroot
