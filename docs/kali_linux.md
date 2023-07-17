@@ -33,7 +33,7 @@ or if you have scons installed via pip --user
 ~/.local/bin/scons
 ```
 
-This will create `bin/ia32_chk/base/esos/ekernel.elf`. This can be run directly in QEMU however it is recommended to package it inside of an ISO file with GRUB2 as the bootloader (for now).
+This will create `ekernel.elf`. This can be run directly in QEMU however it is recommended to package it inside of an ISO file with GRUB2 as the bootloader (for now).
 
 To Create an ISO with GRUB2 pre-loaded, run the following command:
 ```bash
