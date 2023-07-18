@@ -15,7 +15,7 @@
 #include <kernel/terminal/tty.h>
 #include <kernel/terminal/vga.h>
 
-void k_internal_print(enum vga_color color, const char* module, const char* message, va_list args) {   
+void k_internal_print(enum vga_color color, const char* module, const char* message, __attribute__((unused))va_list args) {   
     kprintf("[ ");
     terminal_setcolor(vga_entry_color(color, VGA_COLOR_BLACK));
     kprintf("%s", module);

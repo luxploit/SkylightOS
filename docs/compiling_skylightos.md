@@ -10,13 +10,13 @@ List of available platforms for SkylightOS:
 |--------------|--------------------|------------------|------------------|
 | x86 (32-bit) | ia32               | qemu-system-i386 | Work in Progress |
 
-Before building SkylightOS, first set the following config options in build/config.py:
+Before building SkylightOS, first set the following config options in tools/build/config.py:
 ```py
 config=     # Build Configuration: chk = debug, fre = retail
 arch=       # Build Architecture: see above for list of architectures.
 ```
 
-Then to run the build, execute:
+Then to run the build, in the root directory, execute:
 ```bash
 scons
 ```

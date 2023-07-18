@@ -21,10 +21,10 @@ else
    exit 1
 fi
 
-if [ -x "$(command -v zypper)" ] # dirty hack for grub path
-   mkpath = "/usr/share/grub2/i386-pc"
+if [ -x "$(command -v zypper)" ]; then # dirty hack for grub path
+   mkpath="/usr/share/grub2/i386-pc"
 else
-   mkpath = "/usr/lib/grub/i386-pc"
+   mkpath="/usr/lib/grub/i386-pc"
 fi
 
 if ! ( [[ $version =~ "2." || $version =~ "1.9" ]] ) then
